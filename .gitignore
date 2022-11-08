@@ -1,0 +1,10 @@
+*.pyc
+*.pth
+*.pt
+*.patch
+*.egg-info
+*.egg*
+*.png
+*.jpg
+catboost_info
+test/*.pkl
