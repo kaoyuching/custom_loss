@@ -32,11 +32,13 @@ Customize loss functions.
         ```
 
 ## Supported loss
-1. Dice loss
+1. Dice loss  
     Use in any segmentation task.
-2. Dice loss with BCE loss
+
+2. Dice loss with BCE loss  
     Use in `binary` and `multilabel` segmentation tasks.
-3. Dice loss with CE loss
+
+3. Dice loss with CE loss  
     Use in `multiclass` segmentation task.
 
 
