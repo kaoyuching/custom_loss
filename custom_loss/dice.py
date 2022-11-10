@@ -11,7 +11,7 @@ class DiceLoss(nn.Module):
     r"""
     Compute dice loss
     """
-    def __init__(logit: bool = True, task: str = "binary", smooth: float = 1.):
+    def __init__(self, logit: bool = True, task: str = "binary", smooth: float = 1.):
         super(DiceLoss, self).__init__()
         self.logit = logit
         if task.lower() not in ["binary", "multilabel", "multiclass"]:
