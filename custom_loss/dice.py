@@ -30,8 +30,8 @@ class DiceLoss(nn.Module):
             inputs = torch.sigmoid(inputs)
         if self.logit and self.task == "multiclass":
             inputs = inputs.argmax(dim=1)
-        _inputs = inputs.view(b, c, -1)
-        _targets = targets.view(b, c, -1)
+        _inputs = inputs.reshape(b, c, -1)
+        _targets = targets.reshape(b, c, -1)
 
         intersection = torch.sum(_inputs * _targets, dim=2)
         denominator = torch.sum(_inputs + _targets, dim=2)
@@ -113,12 +113,12 @@ class DiceCELoss(nn.Module):
 
         if self.class_weight is None:
             self.class_weight = [1]*c
-        self.class_weight = torch.tensor(self.class_weight, device=device)
+        self.class_weight = torch.tensor(self.class_weight, device=device, dtype=torch.double)
 
         # compute ce loss
         ce_loss_fn = nn.CrossEntropyLoss(self.class_weight, reduction=self.reduction)
         ce_targets = torch.argmax(targets, dim=1)
-        ce = ce_loss_fn(inputs, ce_targets)
+        ce = ce_loss_fn(inputs.to(torch.double), ce_targets.to(torch.long))
 
         # compute dice loss
         if self.logit:
